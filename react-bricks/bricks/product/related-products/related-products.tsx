@@ -10,9 +10,9 @@ interface RelatedProductsProps {
 const RelatedProducts: types.Brick<RelatedProductsProps> = ({ relatedProducts }) => {
   if (!relatedProducts) return null;
   return (
-    <div className="py-10">
-      <h2 className="text-2xl font-bold dark:text-white">Related Products</h2>
-      <ul className="mt-4 flex w-full gap-4 overflow-x-auto pt-1">
+    <div className="py-8">
+      <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
+      <ul className="flex w-full gap-4 overflow-x-auto pt-1">
         {relatedProducts.map((product) => (
           <li
             key={product.handle}
