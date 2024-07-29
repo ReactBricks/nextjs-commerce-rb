@@ -178,7 +178,12 @@ export function CartProvider({
 export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+    // throw new Error('useCart must be used within a CartProvider');
+    return {
+      cart: undefined,
+      updateCartItem: () => {},
+      addCartItem: () => {}
+    };
   }
   return context;
 }
