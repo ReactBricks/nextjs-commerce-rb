@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link, Text, fetchPages, types } from 'react-bricks/rsc';
 import config from '@/react-bricks/config';
+import { Link, Text, fetchPages, types } from 'react-bricks/rsc';
+
 interface FooterMenuItemProps {
   linkPage: {
     name: string;
@@ -43,7 +43,14 @@ FooterMenuItem.schema = {
       type: types.SideEditPropType.Autocomplete,
       autocompleteOptions: {
         getOptions: async (input) => {
-          const pages = await fetchPages(config.apiKey, { type: 'page' });
+          const pages = await fetchPages({
+            type: 'page',
+            config,
+            fetchOptions: {
+              next: { revalidate: parseInt(process.env.REACT_BRICKS_REVALIDATE || '3', 10) }
+            }
+          });
+
           const pagesWithHome = [
             ...pages,
             {

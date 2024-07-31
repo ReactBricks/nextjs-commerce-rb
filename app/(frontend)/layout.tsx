@@ -46,7 +46,14 @@ const getData = async (
   }
 
   const footer = await Promise.resolve(
-    fetchPage({ slug: 'footer', language: locale, config }).catch(() => {
+    fetchPage({
+      slug: 'footer',
+      language: locale,
+      config,
+      fetchOptions: {
+        next: { revalidate: parseInt(process.env.REACT_BRICKS_REVALIDATE || '3', 10) }
+      }
+    }).catch(() => {
       errorFooter = true;
       return null;
     })

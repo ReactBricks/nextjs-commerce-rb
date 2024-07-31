@@ -52,7 +52,7 @@ const getData = async (
     slug: cleanSlug,
     language: 'en',
     config,
-    fetchOptions: { next: { revalidate: 3 } }
+    fetchOptions: { next: { revalidate: parseInt(process.env.REACT_BRICKS_REVALIDATE || '3', 10) } }
   }).catch(() => {
     errorPage = true;
     return null;
