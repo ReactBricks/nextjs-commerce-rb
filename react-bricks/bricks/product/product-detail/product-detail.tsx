@@ -48,7 +48,7 @@ const ProductDetail: types.Brick<ProductDetailProps> = ({ product, accordion }) 
 
 ProductDetail.schema = {
   name: 'product-detail',
-  label: 'Product Detail',
+  label: 'Product Details',
   getDefaultProps: () => ({}),
   getExternalData: async (page) => {
     const product = await getProduct(page.slug);

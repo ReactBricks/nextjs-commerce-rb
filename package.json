@@ -20,7 +20,7 @@
     "next": "14.2.5",
     "next-themes": "^0.2.1",
     "react": "18.3.1",
-    "react-bricks": "^4.4.1",
+    "react-bricks": "^4.4.2",
     "react-dom": "18.3.1",
     "dayjs": "^1.11.7",
     "email-validator": "^2.0.4",

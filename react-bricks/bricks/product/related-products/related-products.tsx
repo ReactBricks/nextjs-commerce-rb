@@ -44,7 +44,7 @@ const RelatedProducts: types.Brick<RelatedProductsProps> = ({ relatedProducts })
 
 RelatedProducts.schema = {
   name: 'related-products',
-  label: 'Related Products',
+  label: 'Shopify Related Products',
   getDefaultProps: () => ({}),
   getExternalData: async (page) => {
     if (!page?.externalData?.product) return { relatedProducts: null };

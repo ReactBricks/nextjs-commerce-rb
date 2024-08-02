@@ -1,4 +1,4 @@
-import { types, Text, RichText, Image, Link } from 'react-bricks/rsc';
+import { Image, Link, RichText, Text, types } from 'react-bricks/rsc';
 
 interface TextTextImageProps {
   title: types.TextValue;
@@ -115,10 +115,10 @@ const TextTextImage: types.Brick<TextTextImageProps> = ({
 
 TextTextImage.schema = {
   name: 'text-text-image',
-  label: 'Text text image',
+  label: 'Product Info',
   getDefaultProps: () => ({
     title: 'Product details',
-    subtitle: 'The best t-shirt ever',
+    subtitle: 'Subtitle',
     'text-col-1': [
       {
         type: 'paragraph',
