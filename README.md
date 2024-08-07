@@ -21,7 +21,7 @@ In order to use this project with React Bricks visual headless CMS, you'll need 
 
 ### Shopify Setup
 
-To set up the Shopify Store, you may follow the guide [Vercel and Shopify Integration](https://vercel.com/docs/integrations/ecommerce/shopify), with the followinf exception:
+To set up the Shopify Store, you may follow the [Vercel and Shopify Integration guide](https://vercel.com/docs/integrations/ecommerce/shopify), with the following exceptions:
 
 - **You don't need to create pages like "About us"**, "Privacy" etc. in Shopify, because you can create them in React Bricks
 - **You don't need to create the footer menu** in Shopify, as it is managed in React Bricks
