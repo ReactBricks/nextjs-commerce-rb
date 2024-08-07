@@ -14,10 +14,10 @@ React Bricks will keep this integration repository up-to-date with the Next.js C
 
 In order to use this project with React Bricks visual headless CMS, you'll need to [create a free React Bricks account](https://www.reactbricks.com/sign-up), create a React Bricks App from the [Dashboard](https://dashboard.reactbricks.com/) and set the React Bricks App credentials in the `.env` file:
 
-- API_KEY="xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxxxxx"
-- NEXT_PUBLIC_APP_ID="xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxxxxx"
-- NEXT_PUBLIC_ENVIRONMENT="main"
-- REACT_BRICKS_REVALIDATE="1" (in production rise this value to 600 to leverage caching)
+- `API_KEY="xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxxxxx"`
+- `NEXT_PUBLIC_APP_ID="xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxxxxx"`
+- `NEXT_PUBLIC_ENVIRONMENT="main"`
+- `REACT_BRICKS_REVALIDATE="1"` (in production rise this value to 600 to leverage caching)
 
 ### Shopify Setup
 
