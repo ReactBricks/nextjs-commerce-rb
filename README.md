@@ -6,6 +6,27 @@ A high-perfomance, server-rendered Next.js App Router ecommerce application.
 
 This template uses React Server Components, Server Actions, `Suspense`, `useOptimistic`, and more.
 
+## Notes about the React Bricks integration
+
+React Bricks will keep this integration repository up-to-date with the Next.js Commerce repository.
+
+### React Bricks Setup
+
+In order to use this project with React Bricks visual headless CMS, you'll need to [create a free React Bricks account](https://www.reactbricks.com/sign-up), create a React Bricks App from the [Dashboard](https://dashboard.reactbricks.com/) and set the React Bricks App credentials in the `.env` file:
+
+- API_KEY="xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxxxxx"
+- NEXT_PUBLIC_APP_ID="xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxxxxx"
+- NEXT_PUBLIC_ENVIRONMENT="main"
+- REACT_BRICKS_REVALIDATE="1" (in production rise this value to 600 to leverage caching)
+
+### Shopify Setup
+
+To set up the Shopify Store, you may follow the guide [Vercel and Shopify Integration](https://vercel.com/docs/integrations/ecommerce/shopify), with the followinf exception:
+
+- **You don't need to create pages like "About us"**, "Privacy" etc. in Shopify, because you can create them in React Bricks
+- **You don't need to create the footer menu** in Shopify, as it is managed in React Bricks
+- **You need to create a page in React Bricks for each product**, ensuring the "slug" matches the product slug on Shopify (this step won't be required any more in the future, as we'll automate it).
+
 <h3 id="v1-note"></h3>
 
 > Note: Looking for Next.js Commerce v1? View the [code](https://github.com/vercel/commerce/tree/v1), [demo](https://commerce-v1.vercel.store), and [release notes](https://github.com/vercel/commerce/releases/tag/v1).
