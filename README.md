@@ -6,9 +6,12 @@ A high-perfomance, server-rendered Next.js App Router ecommerce application.
 
 This template uses React Server Components, Server Actions, `Suspense`, `useOptimistic`, and more.
 
-## Notes about the React Bricks integration
+## React Bricks integration
 
+With [React Bricks](https://www.reactbricks.com), you can edit the store pages and product details pages in a visual way.  
 React Bricks will keep this integration repository up-to-date with the Next.js Commerce repository.
+
+https://github.com/user-attachments/assets/e7e1b15f-4623-443f-9f59-7701c506425f
 
 ### React Bricks Setup
 
@@ -54,8 +57,12 @@ Vercel is happy to partner and work with any commerce provider to help them get 
 Integrations enable upgraded or additional functionality for Next.js Commerce
 
 - [Orama](https://github.com/oramasearch/nextjs-commerce) ([Demo](https://vercel-commerce.oramasearch.com/))
+
   - Upgrades search to include typeahead with dynamic re-rendering, vector-based similarity search, and JS-based configuration.
   - Search runs entirely in the browser for smaller catalogs or on a CDN for larger.
+
+- [React Bricks](https://github.com/ReactBricks/nextjs-commerce-rb) ([Demo](https://nextjs-commerce.reactbricks.com/))
+  - Edit pages, product details, and footer content visually using [React Bricks](https://www.reactbricks.com) visual headless CMS.
 
 ## Running locally
 
