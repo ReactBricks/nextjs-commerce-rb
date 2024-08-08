@@ -11,7 +11,7 @@ This template uses React Server Components, Server Actions, `Suspense`, `useOpti
 With [React Bricks](https://www.reactbricks.com), you can edit the store pages and product details pages in a visual way.  
 React Bricks will keep this integration repository up-to-date with the Next.js Commerce repository.
 
-[![Visual Editing Demo](https://img.youtube.com/vi/OEor3wFW8VA/0.jpg)](https://www.youtube.com/watch?v=OEor3wFW8VA)
+https://github.com/user-attachments/assets/e7e1b15f-4623-443f-9f59-7701c506425f
 
 ### React Bricks Setup
 
