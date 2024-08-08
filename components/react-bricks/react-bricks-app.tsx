@@ -24,10 +24,9 @@ export default function ReactBricksApp({ children }: { children: React.ReactNode
 
   // DEMO ONLY: SET TOKEN
   useEffect(() => {
-    localStorage.setItem(
-      'rb_t',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJFRElUT1IiXSwidXNlciI6eyJ1c2VySWQiOiIwYTEzMzgwZC1jYjJiLTQ1MjktYjM0NS0yMjU4NTk5YmZjYzQiLCJhcHBJZCI6IjZhYmRlNzA3LWQyZmYtNGVmOS05NDhlLTdiZTBlODc4YTc0OSIsImFwcEVudiI6Im1haW4iLCJhY2NvdW50SWQiOiI5YjJiYmNkOC0yYjExLTQ4MGMtYTlmOC0xNzkwZDE4ODE5MjUiLCJlbWFpbCI6ImRlbW8tY29tbWVyY2VAcmVhY3Ricmlja3MuY29tIiwicmVhZE9ubHkiOmZhbHNlLCJjYW5DcmVhdGVQYWdlIjp0cnVlLCJjYW5EZWxldGVQYWdlIjp0cnVlLCJjYW5EZXBsb3kiOmZhbHNlLCJjYW5EZXBsb3lTdGFnaW5nIjpmYWxzZSwiY2FuRGVwbG95RGV2IjpmYWxzZSwiY2FuQXBwcm92ZSI6ZmFsc2UsImNhbkVkaXRQYWdlQXR0cmlidXRlcyI6dHJ1ZSwiY2FuRWRpdFNlbyI6dHJ1ZSwiaXNWZXJpZmllZCI6dHJ1ZX0sImlhdCI6MTcyMjY3NDE3ODM3Mywia2VlcExvZ2dlZEluIjp0cnVlLCJleHAiOjE3MjI2NzU0NzQzNzN9.9Xr_P24VH-3xBpeRe7Teylo8Bcrb4wPClzOreLWUBSs'
-    );
+    if (process.env.NEXT_PUBLIC_DEMO_TOKEN) {
+      localStorage.setItem('rb_t', process.env.NEXT_PUBLIC_DEMO_TOKEN);
+    }
   }, []);
 
   useEffect(() => {
