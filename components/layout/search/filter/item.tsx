@@ -1,8 +1,8 @@
 'use client';
 
+import { createUrl } from '@/lib/shopify/utils';
 import clsx from 'clsx';
-import type { SortFilterItem } from 'lib/constants';
-import { createUrl } from 'lib/utils';
+import type { SortFilterItem } from '@/lib/shopify/constants';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import type { ListItem, PathFilterItem } from '.';

@@ -1,6 +1,6 @@
 'use server';
 
-import { TAGS } from 'lib/constants';
+import { TAGS } from '@/lib/shopify/constants';
 import { addToCart, createCart, getCart, removeFromCart, updateCart } from 'lib/shopify';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';

@@ -1,5 +1,5 @@
+import { validateEnvironmentVariables } from '@/lib/shopify/utils';
 import { getCollections, getPages, getProducts } from 'lib/shopify';
-import { validateEnvironmentVariables } from 'lib/utils';
 import { MetadataRoute } from 'next';
 
 type Route = {

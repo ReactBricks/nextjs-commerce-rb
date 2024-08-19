@@ -5,7 +5,7 @@ import ErrorNoKeys from '@/components/react-bricks/error-no-keys';
 import ErrorNoPage from '@/components/react-bricks/error-no-page';
 import { Product } from '@/lib/shopify/types';
 import config from '@/react-bricks/config';
-import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
+import { HIDDEN_PRODUCT_TAG } from '@/lib/shopify/constants';
 import { getProduct } from 'lib/shopify';
 import { cleanPage, fetchPage, getBricks, JsonLd, PageViewer, types } from 'react-bricks/rsc';
 import { ClickToEdit } from 'react-bricks/rsc/client';

@@ -1,6 +1,6 @@
 import Grid from 'components/grid';
 import ProductGridItems from 'components/layout/product-grid-items';
-import { defaultSort, sorting } from 'lib/constants';
+import { defaultSort, sorting } from '@/lib/shopify/constants';
 import { getProducts } from 'lib/shopify';
 
 export const metadata = {
