@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation';
 
 import ErrorNoKeys from '@/components/react-bricks/error-no-keys';
 import ErrorNoPage from '@/components/react-bricks/error-no-page';
-import { Product } from '@/lib/shopify/types';
+import { Product } from '@/lib/medusa/types';
 import config from '@/react-bricks/config';
 import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
-import { getProduct } from 'lib/shopify';
+import { getProduct } from 'lib/medusa';
 import { cleanPage, fetchPage, getBricks, JsonLd, PageViewer, types } from 'react-bricks/rsc';
 import { ClickToEdit } from 'react-bricks/rsc/client';
 
@@ -95,8 +95,8 @@ export async function generateMetadata({
   const indexable = !product.tags.includes(HIDDEN_PRODUCT_TAG);
 
   return {
-    title: product.seo.title || product.title,
-    description: product.seo.description || product.description,
+    title: product?.seo?.title || product.title,
+    description: product?.seo?.description || product.description,
     robots: {
       index: indexable,
       follow: indexable,

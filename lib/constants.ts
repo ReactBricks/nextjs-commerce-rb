@@ -29,3 +29,12 @@ export const TAGS = {
 export const HIDDEN_PRODUCT_TAG = 'nextjs-frontend-hidden';
 export const DEFAULT_OPTION = 'Default Title';
 export const SHOPIFY_GRAPHQL_API_ENDPOINT = '/api/2023-01/graphql.json';
+
+export const CHECKOUT_PAGE_PROPS = {
+  title: 'Checkout',
+  body: `Checkout is not implemented yet in this template. Check out 
+        <a href="https://docs.medusajs.com/modules/carts-and-checkout/storefront/implement-checkout-flow">our guide on implementing a checkout flow</a> to learn more.`,
+  description: 'Checkout is not implemented yet in this template',
+  updatedAt: new Date().toISOString(),
+  createdAt: new Date().toISOString()
+};
