@@ -1,6 +1,6 @@
 import { ThreeItemGridItem } from '@/components/grid/three-items';
-import { getCollectionProducts, getProducts } from '@/lib/shopify';
-import { Product } from '@/lib/shopify/types';
+import { getCollectionProducts, getProducts } from '@/lib/medusa';
+import type { Product } from '@/lib/medusa/types';
 import { types } from 'react-bricks/rsc';
 
 interface HomeThreeItemsProps {
@@ -57,7 +57,7 @@ HomeThreeItems.schema = {
   getExternalData: async (page, props) => {
     if (props?.shopify) {
       const products = await getCollectionProducts({
-        collection: 'hidden-homepage-featured-items'
+        handle: 'hidden-homepage-featured-items'
       });
       return { products };
     } else return { products: null };

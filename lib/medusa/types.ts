@@ -135,7 +135,7 @@ export type ProductCategory = {
 
 export type MedusaProductVariant = {
   id: string;
-  title?: string;
+  title: string;
   product_id: string;
   product?: Product;
   prices?: MoneyAmount[];

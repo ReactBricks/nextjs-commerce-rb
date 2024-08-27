@@ -1,6 +1,6 @@
 import { GridTileImage } from '@/components/grid/tile';
-import { getCollectionProducts } from '@/lib/shopify';
-import { Product } from '@/lib/shopify/types';
+import { getCollectionProducts } from '@/lib/medusa';
+import type { Product } from '@/lib/medusa/types';
 import Link from 'next/link';
 import { types } from 'react-bricks/rsc';
 
@@ -46,7 +46,7 @@ HomeCarousel.schema = {
   label: 'Home Carousel',
   getDefaultProps: () => ({}),
   getExternalData: async () => {
-    const products = await getCollectionProducts({ collection: 'hidden-homepage-carousel' });
+    const products = await getCollectionProducts({ handle: 'hidden-homepage-carousel' });
     return { products };
   }
 };
