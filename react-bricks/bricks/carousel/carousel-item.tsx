@@ -1,6 +1,6 @@
 import { GridTileImage } from '@/components/grid/tile';
-import { getProducts } from '@/lib/shopify';
-import { Product } from '@/lib/shopify/types';
+import { getProducts } from '@/lib/medusa';
+import type { Product } from '@/lib/medusa/types';
 
 import { types, Link } from 'react-bricks/rsc';
 interface CarouselItemProps {
@@ -65,7 +65,7 @@ CarouselItem.schema = {
         getNoOptionsMessage: (input) => {
           return 'No page found with ' + input;
         },
-        placeholder: 'Search from Shopify...'
+        placeholder: 'Search from Medusa...'
       }
     }
   ]

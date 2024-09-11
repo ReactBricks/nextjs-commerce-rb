@@ -1,7 +1,7 @@
 'use server';
 
 import { TAGS } from 'lib/constants';
-import { addToCart, createCart, getCart, removeFromCart, updateCart } from 'lib/shopify';
+import { addToCart, createCart, getCart, removeFromCart, updateCart } from 'lib/medusa';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -14,7 +14,7 @@ export async function addItem(prevState: any, selectedVariantId: string | undefi
   }
 
   try {
-    await addToCart(cartId, [{ merchandiseId: selectedVariantId, quantity: 1 }]);
+    await addToCart(cartId, { merchandiseId: selectedVariantId, quantity: 1 });
     revalidateTag(TAGS.cart);
   } catch (e) {
     return 'Error adding item to cart';
@@ -38,7 +38,7 @@ export async function removeItem(prevState: any, merchandiseId: string) {
     const lineItem = cart.lines.find((line) => line.merchandise.id === merchandiseId);
 
     if (lineItem && lineItem.id) {
-      await removeFromCart(cartId, [lineItem.id]);
+      await removeFromCart(cartId, lineItem.id);
       revalidateTag(TAGS.cart);
     } else {
       return 'Item not found in cart';
@@ -74,24 +74,21 @@ export async function updateItemQuantity(
 
     if (lineItem && lineItem.id) {
       if (quantity === 0) {
-        await removeFromCart(cartId, [lineItem.id]);
+        await removeFromCart(cartId, lineItem.id);
       } else {
-        await updateCart(cartId, [
-          {
-            id: lineItem.id,
-            merchandiseId,
-            quantity
-          }
-        ]);
+        await updateCart(cartId, {
+          lineItemId: lineItem.id,
+          // merchandiseId,
+          quantity
+        });
       }
     } else if (quantity > 0) {
       // If the item doesn't exist in the cart and quantity > 0, add it
-      await addToCart(cartId, [{ merchandiseId, quantity }]);
+      await addToCart(cartId, { merchandiseId, quantity });
     }
 
     revalidateTag(TAGS.cart);
   } catch (e) {
-    console.error(e);
     return 'Error updating item quantity';
   }
 }

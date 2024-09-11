@@ -7,7 +7,7 @@ import ReactBricksApp from 'components/react-bricks/react-bricks-app';
 import { ThemeProvider } from 'components/react-bricks/theme-provider';
 import { WelcomeToast } from 'components/welcome-toast';
 import { GeistSans } from 'geist/font/sans';
-import { getCart } from 'lib/shopify';
+import { getCart } from 'lib/medusa';
 import { ensureStartsWith } from 'lib/utils';
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
@@ -87,7 +87,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const cartId = cookies().get('cartId')?.value;
+  const cartId = cookies().get('cartId')?.value || '';
   const { footer, errorNoKeys, errorFooter } = await getData('en');
 
   // Don't await the fetch, pass the Promise to the context provider

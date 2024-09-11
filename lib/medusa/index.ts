@@ -47,16 +47,16 @@ export default async function medusaRequest({
     ...(tags && { next: { tags } })
   };
 
-  if (path.includes('/carts')) {
-    options.cache = 'no-cache';
-  }
+  //if (path.includes('/carts')) {
+  options.cache = 'no-cache';
+  //}
 
   if (payload) {
     options.body = JSON.stringify(payload);
   }
 
   try {
-    console.log('API CALL: ', `${ENDPOINT}/store${path}`, options);
+    //console.log('API CALL: ', `${ENDPOINT}/store${path}`, options);
     const result = await fetch(`${ENDPOINT}/store${path}`, options);
 
     const body = await result.json();
@@ -306,17 +306,18 @@ export async function createCart(): Promise<Cart> {
 
 export async function addToCart(
   cartId: string,
-  lineItem: { variantId: string; quantity: number }
+  lineItem: { merchandiseId: string; quantity: number }
 ): Promise<Cart> {
   const res = await medusaRequest({
     method: 'POST',
     path: `/carts/${cartId}/line-items`,
     payload: {
-      variant_id: lineItem?.variantId,
+      variant_id: lineItem?.merchandiseId,
       quantity: lineItem?.quantity
     },
     tags: ['cart']
   });
+  console.log('ADD TO CART: ', cartId, lineItem, res);
   return reshapeCart(res.body.cart);
 }
 
@@ -344,12 +345,12 @@ export async function updateCart(
   return reshapeCart(res.body.cart);
 }
 
-export async function getCart(cartId: string): Promise<Cart | null> {
+export async function getCart(cartId: string): Promise<Cart | undefined> {
   const res = await medusaRequest({ method: 'GET', path: `/carts/${cartId}`, tags: ['cart'] });
   const cart = res.body.cart;
 
   if (!cart) {
-    return null;
+    return undefined;
   }
 
   return reshapeCart(cart);
@@ -400,9 +401,43 @@ export async function getCollectionProducts({
 
   const collection = res.body.collections[0];
 
-  const collection_products = await getProducts({ reverse, sortKey, collectionId: collection ? collection.id : null});
+  const collection_products = await getProducts({
+    reverse,
+    sortKey,
+    collectionId: collection ? collection.id : null
+  });
 
   return collection_products;
+}
+
+export async function getCategoryProducts({
+  handle,
+  reverse,
+  sortKey
+}: {
+  handle: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<Product[]> {
+  const res = await medusaRequest({
+    method: 'GET',
+    path: `/product-categories?handle=${handle}`,
+    tags: ['categories', 'products']
+  });
+
+  if (!res) {
+    return [];
+  }
+
+  const category = res.body.product_categories[0];
+
+  const category_products = await getProducts({
+    reverse,
+    sortKey,
+    categoryId: category ? category.id : null
+  });
+
+  return category_products;
 }
 
 export async function getProduct(handle: string): Promise<Product> {
@@ -419,30 +454,28 @@ export async function getProducts({
   query,
   reverse,
   sortKey,
-  collectionId
+  collectionId,
+  categoryId
 }: {
   query?: string;
   reverse?: boolean;
   sortKey?: string;
   collectionId?: string;
+  categoryId?: string;
 }): Promise<Product[]> {
-  let res;
+  const productQueryOptions = query
+    ? `q=${query}`
+    : collectionId
+      ? `collection_id[]=${collectionId}`
+      : categoryId
+        ? `category_id[]=${categoryId}`
+        : '';
 
-  if (query) {
-    res = await medusaRequest({
-      method: 'GET',
-      path: `/products?q=${query}&limit=100`,
-      tags: ['products']
-    });
-  } else if (collectionId) {
-    res = await medusaRequest({
-      method: 'GET',
-      path: `/products?collection_id[]=${collectionId}&limit=100`,
-      tags: ['products']
-    });
-  } else {
-    res = await medusaRequest({ method: 'GET', path: `/products?limit=100`, tags: ['products'] });
-  }
+  const res = await medusaRequest({
+    method: 'GET',
+    path: `/products?${productQueryOptions}&limit=100`,
+    tags: ['products']
+  });
 
   if (!res) {
     console.error("Couldn't fetch products");

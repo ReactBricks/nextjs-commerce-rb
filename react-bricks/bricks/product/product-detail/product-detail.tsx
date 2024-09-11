@@ -1,8 +1,8 @@
 import { ProductProvider } from '@/components/product/product-context';
-import { getProduct } from '@/lib/shopify';
+import { getProduct } from '@/lib/medusa';
 import { Gallery } from 'components/product/gallery';
 import { ProductDescription } from 'components/product/product-description';
-import { Image, Product } from 'lib/shopify/types';
+import type { Image, Product } from 'lib/medusa/types';
 import { Suspense } from 'react';
 import { Repeater, types } from 'react-bricks/rsc';
 
@@ -23,10 +23,12 @@ const ProductDetail: types.Brick<ProductDetailProps> = ({ product, accordion }) 
             }
           >
             <Gallery
-              images={product.images.slice(0, 5).map((image: Image) => ({
-                src: image.url,
-                altText: image.altText
-              }))}
+              images={
+                (product?.images as Image[] | undefined)?.slice(0, 5).map((image) => ({
+                  src: image.url,
+                  altText: image.altText
+                })) || []
+              }
             />
           </Suspense>
         </div>

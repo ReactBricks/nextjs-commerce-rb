@@ -1,10 +1,10 @@
-import { getCollectionProducts } from 'lib/shopify';
+import { getCollectionProducts } from 'lib/medusa';
 import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
 
 export async function Carousel() {
   // Collections that start with `hidden-*` are hidden from the search page.
-  const products = await getCollectionProducts({ collection: 'hidden-homepage-carousel' });
+  const products = await getCollectionProducts({ handle: 'hidden-homepage-carousel' });
 
   if (!products?.length) return null;
 

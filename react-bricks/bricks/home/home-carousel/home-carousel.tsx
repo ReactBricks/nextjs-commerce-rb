@@ -1,5 +1,5 @@
 import { GridTileImage } from '@/components/grid/tile';
-import { getCollectionProducts } from '@/lib/medusa';
+import { getCategoryProducts } from '@/lib/medusa';
 import type { Product } from '@/lib/medusa/types';
 import Link from 'next/link';
 import { types } from 'react-bricks/rsc';
@@ -14,7 +14,7 @@ const HomeCarousel: types.Brick<HomeCarouselProps> = ({ products }) => {
   // Purposefully duplicating products to make the carousel loop and not run out of products on wide screens.
   const carouselProducts = [...products, ...products, ...products];
   return (
-    <div className=" w-full overflow-x-auto pb-6 pt-1">
+    <div className="w-full overflow-x-auto pb-6 pt-1">
       <ul className="flex animate-carousel gap-4">
         {carouselProducts.map((product, i) => (
           <li
@@ -46,7 +46,7 @@ HomeCarousel.schema = {
   label: 'Home Carousel',
   getDefaultProps: () => ({}),
   getExternalData: async () => {
-    const products = await getCollectionProducts({ handle: 'hidden-homepage-carousel' });
+    const products = await getCategoryProducts({ handle: 'hidden-homepage-carousel' });
     return { products };
   }
 };

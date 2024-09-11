@@ -1,10 +1,10 @@
 import { ThreeItemGridItem } from '@/components/grid/three-items';
-import { getCollectionProducts, getProducts } from '@/lib/medusa';
+import { getCategoryProducts, getProducts } from '@/lib/medusa';
 import type { Product } from '@/lib/medusa/types';
 import { types } from 'react-bricks/rsc';
 
 interface HomeThreeItemsProps {
-  shopify: boolean;
+  medusa: boolean;
   products: Product[] | null;
   firstProduct?: Product;
   secondProduct?: Product;
@@ -12,7 +12,7 @@ interface HomeThreeItemsProps {
 }
 
 const HomeThreeItems: types.Brick<HomeThreeItemsProps> = ({
-  shopify,
+  medusa,
   products,
   firstProduct,
   secondProduct,
@@ -43,20 +43,24 @@ const HomeThreeItems: types.Brick<HomeThreeItemsProps> = ({
     </section>
   );
 
-  if (shopify && products && products.length === 3) {
-    return renderGrid(products);
-  } else return renderGrid([firstProduct, secondProduct, thirdProduct]);
+  if (medusa) {
+    if (products && products.length === 3) {
+      return renderGrid(products);
+    }
+    return null;
+  }
+  return renderGrid([firstProduct, secondProduct, thirdProduct]);
 };
 
 HomeThreeItems.schema = {
   name: 'home-three-items',
   label: 'Home Three Items',
   getDefaultProps: () => ({
-    shopify: false
+    medusa: false
   }),
   getExternalData: async (page, props) => {
-    if (props?.shopify) {
-      const products = await getCollectionProducts({
+    if (props?.medusa) {
+      const products = await getCategoryProducts({
         handle: 'hidden-homepage-featured-items'
       });
       return { products };
@@ -64,15 +68,15 @@ HomeThreeItems.schema = {
   },
   sideEditProps: [
     {
-      name: 'shopify',
-      label: 'From Shopify collection',
+      name: 'medusa',
+      label: 'From Medusa collection',
       type: types.SideEditPropType.Boolean
     },
     {
       name: 'firstProduct',
       label: '1st Product',
       show: (props) => {
-        return !props.shopify;
+        return !props.medusa;
       },
       type: types.SideEditPropType.Autocomplete,
       autocompleteOptions: {
@@ -93,14 +97,14 @@ HomeThreeItems.schema = {
         getNoOptionsMessage: (input) => {
           return 'No product found for ' + input;
         },
-        placeholder: 'Search from Shopify...'
+        placeholder: 'Search from Medusa...'
       }
     },
     {
       name: 'secondProduct',
       label: '2nd Product',
       show: (props) => {
-        return !props.shopify;
+        return !props.medusa;
       },
       type: types.SideEditPropType.Autocomplete,
       autocompleteOptions: {
@@ -121,14 +125,14 @@ HomeThreeItems.schema = {
         getNoOptionsMessage: (input) => {
           return 'No product found for ' + input;
         },
-        placeholder: 'Search from Shopify...'
+        placeholder: 'Search from Medusa...'
       }
     },
     {
       name: 'thirdProduct',
       label: '3rd Product',
       show: (props) => {
-        return !props.shopify;
+        return !props.medusa;
       },
       type: types.SideEditPropType.Autocomplete,
       autocompleteOptions: {
@@ -149,7 +153,7 @@ HomeThreeItems.schema = {
         getNoOptionsMessage: (input) => {
           return 'No product found for ' + input;
         },
-        placeholder: 'Search from Shopify...'
+        placeholder: 'Search from Medusa...'
       }
     }
   ]

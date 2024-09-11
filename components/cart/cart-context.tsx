@@ -1,6 +1,6 @@
 'use client';
 
-import type { Cart, CartItem, Product, ProductVariant } from 'lib/shopify/types';
+import type { Cart, CartItem, Product, ProductVariant } from 'lib/medusa/types';
 import React, { createContext, use, useContext, useMemo, useOptimistic } from 'react';
 
 type UpdateType = 'plus' | 'minus' | 'delete';
@@ -48,11 +48,14 @@ function createOrUpdateCartItem(
   variant: ProductVariant,
   product: Product
 ): CartItem {
+  console.log('createOrUpdateCartItem');
   const quantity = existingItem ? existingItem.quantity + 1 : 1;
   const totalAmount = calculateItemCost(quantity, variant.price.amount);
 
+  console.log(existingItem, variant, product);
+
   return {
-    id: existingItem?.id,
+    id: existingItem ? existingItem?.id : '',
     quantity,
     cost: {
       totalAmount: {
@@ -90,6 +93,7 @@ function updateCartTotals(lines: CartItem[]): Pick<Cart, 'totalQuantity' | 'cost
 }
 
 function createEmptyCart(): Cart {
+  console.log('createEmptyCart');
   return {
     id: undefined,
     checkoutUrl: '',
@@ -104,6 +108,7 @@ function createEmptyCart(): Cart {
 }
 
 function cartReducer(state: Cart | undefined, action: CartAction): Cart {
+  console.log('cartReducer');
   const currentCart = state || createEmptyCart();
 
   switch (action.type) {
@@ -152,6 +157,14 @@ export function CartProvider({
   children: React.ReactNode;
   cartPromise: Promise<Cart | undefined>;
 }) {
+  // console.log('CartProvider')
+
+  // return <CartContext.Provider value={{
+  //   cart: undefined,
+  //   updateCartItem: undefined,
+  //   addCartItem: undefined
+  // }}>{children}</CartContext.Provider>;
+
   const initialCart = use(cartPromise);
   const [optimisticCart, updateOptimisticCart] = useOptimistic(initialCart, cartReducer);
 
@@ -176,6 +189,7 @@ export function CartProvider({
 }
 
 export function useCart() {
+  console.log('useCart');
   const context = useContext(CartContext);
   if (context === undefined) {
     // throw new Error('useCart must be used within a CartProvider');

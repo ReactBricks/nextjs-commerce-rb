@@ -1,5 +1,9 @@
-import { getCollections, getPages, getProducts } from 'lib/shopify';
-import { validateEnvironmentVariables } from 'lib/utils';
+import {
+  getCollections,
+  // getPages,
+  getProducts
+} from 'lib/medusa';
+// import { validateEnvironmentVariables } from 'lib/utils';
 import { MetadataRoute } from 'next';
 
 type Route = {
@@ -11,10 +15,10 @@ const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
   : 'http://localhost:3000';
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  validateEnvironmentVariables();
+  // validateEnvironmentVariables();
 
   const routesMap = [''].map((route) => ({
     url: `${baseUrl}${route}`,
@@ -31,21 +35,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const productsPromise = getProducts({}).then((products) =>
     products.map((product) => ({
       url: `${baseUrl}/product/${product.handle}`,
-      lastModified: product.updatedAt
+      lastModified: product.updatedAt.toISOString()
     }))
   );
 
-  const pagesPromise = getPages().then((pages) =>
-    pages.map((page) => ({
-      url: `${baseUrl}/${page.handle}`,
-      lastModified: page.updatedAt
-    }))
-  );
+  // const pagesPromise = getPages().then((pages) =>
+  //   pages.map((page) => ({
+  //     url: `${baseUrl}/${page.handle}`,
+  //     lastModified: page.updatedAt
+  //   }))
+  // );
 
   let fetchedRoutes: Route[] = [];
 
   try {
-    fetchedRoutes = (await Promise.all([collectionsPromise, productsPromise, pagesPromise])).flat();
+    fetchedRoutes = (
+      await Promise.all([
+        collectionsPromise,
+        productsPromise
+        // pagesPromise
+      ])
+    ).flat();
   } catch (error) {
     throw JSON.stringify(error, null, 2);
   }

@@ -1,4 +1,4 @@
-import { getProduct } from '@/lib/shopify';
+import { getProduct } from '@/lib/medusa';
 import { types } from 'react-bricks/rsc';
 
 const pageTypes: types.IPageType[] = [
