@@ -167,9 +167,10 @@ const reshapeLineItem = (lineItem: MedusaLineItem): CartItem => {
         lineItem.total,
         lineItem.variant?.prices?.[0]?.currency_code
       ).toString(),
-      currencyCode: lineItem.variant?.prices?.[0]?.currency_code.toUpperCase() || 'EUR'
+      currencyCode: lineItem.variant?.prices?.[0]?.currency_code.toUpperCase() || 'USD'
     }
   };
+
   const quantity = lineItem.quantity;
 
   return {
