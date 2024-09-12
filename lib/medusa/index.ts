@@ -129,13 +129,13 @@ const reshapeCart = (cart: MedusaCart): Cart => {
 };
 
 const reshapeLineItem = (lineItem: MedusaLineItem): CartItem => {
-  const product = {
-    title: lineItem.title,
+  const product: Product = {
+    title: lineItem.title || '',
     priceRange: {
       maxVariantPrice: calculateVariantAmount(lineItem.variant)
     },
-    updatedAt: lineItem.updated_at,
-    createdAt: lineItem.created_at,
+    updatedAt: lineItem.updated_at || new Date(),
+    createdAt: lineItem.created_at || new Date(),
     tags: [],
     descriptionHtml: lineItem.description ?? '',
     featuredImage: {
@@ -143,10 +143,14 @@ const reshapeLineItem = (lineItem: MedusaLineItem): CartItem => {
       altText: lineItem.title ?? ''
     },
     availableForSale: true,
-    variants: [lineItem.variant && reshapeProductVariant(lineItem.variant)],
+    variants: [],
     handle: lineItem.variant?.product?.handle ?? '',
     options: [] as ProductOption[]
   };
+
+  if (lineItem.variant) {
+    product.variants.push(reshapeProductVariant(lineItem.variant));
+  }
 
   const selectedOptions =
     lineItem.variant?.options?.map((option) => ({
@@ -164,7 +168,7 @@ const reshapeLineItem = (lineItem: MedusaLineItem): CartItem => {
   const cost = {
     totalAmount: {
       amount: convertToDecimal(
-        lineItem.total,
+        lineItem.total || 0,
         lineItem.variant?.prices?.[0]?.currency_code
       ).toString(),
       currencyCode: lineItem.variant?.prices?.[0]?.currency_code.toUpperCase() || 'USD'
