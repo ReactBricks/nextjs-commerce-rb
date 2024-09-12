@@ -345,7 +345,7 @@ export async function updateCart(
   return reshapeCart(res.body.cart);
 }
 
-export async function getCart(cartId: string): Promise<Cart | undefined> {
+export async function getCart(cartId?: string): Promise<Cart | undefined> {
   const res = await medusaRequest({ method: 'GET', path: `/carts/${cartId}`, tags: ['cart'] });
   const cart = res.body.cart;
 

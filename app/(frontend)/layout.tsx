@@ -87,7 +87,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const cartId = cookies().get('cartId')?.value || '';
+  const cartId = cookies().get('cartId')?.value;
   const { footer, errorNoKeys, errorFooter } = await getData('en');
 
   // Don't await the fetch, pass the Promise to the context provider
