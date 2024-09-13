@@ -14,10 +14,6 @@ import {
 } from 'react-bricks/rsc';
 import { ClickToEdit } from 'react-bricks/rsc/client';
 
-// import Prose from 'components/prose';
-// import { getPage } from 'lib/shopify';
-// import { notFound } from 'next/navigation';
-
 const getData = async (
   slug: any
 ): Promise<{

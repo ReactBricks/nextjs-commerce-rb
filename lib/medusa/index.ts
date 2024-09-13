@@ -172,6 +172,7 @@ const reshapeLineItem = (lineItem: MedusaLineItem): CartItem => {
         lineItem.variant?.prices?.[0]?.currency_code
       ).toString(),
       currencyCode: lineItem.variant?.prices?.[0]?.currency_code.toUpperCase() || 'USD'
+      // currencyCode: product.priceRange.maxVariantPrice.currencyCode.toUpperCase() || 'USD'
     }
   };
 
