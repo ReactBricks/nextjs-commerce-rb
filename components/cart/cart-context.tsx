@@ -48,11 +48,8 @@ function createOrUpdateCartItem(
   variant: ProductVariant,
   product: Product
 ): CartItem {
-  console.log('createOrUpdateCartItem');
   const quantity = existingItem ? existingItem.quantity + 1 : 1;
   const totalAmount = calculateItemCost(quantity, variant.price.amount);
-
-  console.log(existingItem, variant, product);
 
   return {
     id: existingItem ? existingItem?.id : '',
@@ -88,7 +85,6 @@ function updateCartTotals(lines: CartItem[]): Pick<Cart, 'totalQuantity' | 'cost
 }
 
 function createEmptyCart(): Cart {
-  console.log('createEmptyCart');
   return {
     id: undefined,
     checkoutUrl: '',
@@ -103,7 +99,6 @@ function createEmptyCart(): Cart {
 }
 
 function cartReducer(state: Cart | undefined, action: CartAction): Cart {
-  console.log('cartReducer');
   const currentCart = state || createEmptyCart();
 
   switch (action.type) {
@@ -152,8 +147,6 @@ export function CartProvider({
   children: React.ReactNode;
   cartPromise: Promise<Cart | undefined>;
 }) {
-  // console.log('CartProvider')
-
   // return <CartContext.Provider value={{
   //   cart: undefined,
   //   updateCartItem: undefined,
@@ -184,7 +177,6 @@ export function CartProvider({
 }
 
 export function useCart() {
-  console.log('useCart');
   const context = useContext(CartContext);
   if (context === undefined) {
     // throw new Error('useCart must be used within a CartProvider');

@@ -323,7 +323,7 @@ export async function addToCart(
     },
     tags: ['cart']
   });
-  console.log('ADD TO CART: ', cartId, lineItem, res);
+
   return reshapeCart(res.body.cart);
 }
 
@@ -352,7 +352,11 @@ export async function updateCart(
 }
 
 export async function getCart(cartId?: string): Promise<Cart | undefined> {
-  const res = await medusaRequest({ method: 'GET', path: `/carts/${cartId}`, tags: ['cart'] });
+  const res = await medusaRequest({
+    method: 'GET',
+    path: `/carts/${cartId}?expand=items.variant.prices`,
+    tags: ['cart']
+  });
   const cart = res.body.cart;
 
   if (!cart) {
