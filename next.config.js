@@ -22,6 +22,10 @@ module.exports = {
         protocol: 'http',
         hostname: 'localhost',
         port: '9000'
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.nextjs-commerce-medusa.reactbricks.com'
       }
     ]
   }
