@@ -45,9 +45,9 @@ export type MedusaProduct = {
   metadata?: Record<string, any>;
   discountable?: boolean;
   collection_id: string;
-  created_at: Date;
-  updated_at: Date;
-  deleted_at: Date | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
   type_id: string;
   material?: string | null;
   tags?: ProductTag[];

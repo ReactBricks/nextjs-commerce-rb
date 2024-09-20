@@ -214,8 +214,8 @@ const reshapeProduct = (product: MedusaProduct): Product => {
     }
   };
 
-  const updatedAt = product.updated_at;
-  const createdAt = product.created_at;
+  const updatedAt = new Date(product.updated_at);
+  const createdAt = new Date(product.created_at);
   const tags = product.tags?.map((tag) => tag.value) || [];
   const descriptionHtml = product.description ?? '';
   const featuredImageFilename = product.thumbnail?.match(/.*\/(.*)\..*/)![1];

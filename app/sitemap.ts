@@ -20,9 +20,11 @@ const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // validateEnvironmentVariables();
 
+  const now = new Date().toISOString();
+
   const routesMap = [''].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date().toISOString()
+    lastModified: now
   }));
 
   const collectionsPromise = getCollections().then((collections) =>
@@ -33,10 +35,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   const productsPromise = getProducts({}).then((products) =>
-    products.map((product) => ({
-      url: `${baseUrl}/product/${product.handle}`,
-      lastModified: product.updatedAt.toISOString()
-    }))
+    products.map((product) => {
+      console.log(product);
+      return {
+        url: `${baseUrl}/product/${product.handle}`,
+        lastModified: product.updated_at || now
+      };
+    })
   );
 
   // const pagesPromise = getPages().then((pages) =>
