@@ -33,6 +33,32 @@ const pageTypes: types.IPageType[] = [
     pluralName: 'products',
     defaultLocked: false,
     defaultStatus: types.PageStatus.Published,
+    template: [
+      {
+        slotName: 'product-main-data',
+        label: 'Image, Variants, Add to Cart',
+        allowedBlockTypes: ['product-detail'],
+        min: 1,
+        max: 1,
+        editable: true
+      },
+      {
+        slotName: 'product-info',
+        label: 'Product info',
+        allowedBlockTypes: ['text-text-image', 'carousel'],
+        min: 0,
+        max: 3,
+        editable: true
+      },
+      {
+        slotName: 'related-products',
+        label: 'Related Products',
+        allowedBlockTypes: ['related-products'],
+        min: 1,
+        max: 1,
+        editable: false
+      }
+    ],
     getDefaultContent: () => [
       {
         id: 'product-detail',
