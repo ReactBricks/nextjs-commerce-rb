@@ -48,8 +48,8 @@ importers:
         specifier: 19.0.0-rc-3208e73e-20240730
         version: 19.0.0-rc-3208e73e-20240730
       react-bricks:
-        specifier: ^4.4.2
-        version: 4.4.2(@types/react@18.3.3)(immer@9.0.21)(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730)(tailwindcss@3.4.7)
+        specifier: ^4.5.0
+        version: 4.5.0(@types/react@18.3.3)(immer@9.0.21)(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730)(tailwindcss@3.4.7)
       react-dom:
         specifier: 19.0.0-rc-3208e73e-20240730
         version: 19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730)
@@ -1217,8 +1217,8 @@ packages:
       react: ^16.14.0 || ^17 || ^18
       react-dom: ^16.14.0 || ^17 || ^18
 
-  react-bricks@4.4.2:
-    resolution: {integrity: sha512-uqnmUyvMOF+uFXbvYno4W/FM9VMVpFk/0wUk5UOe4+lUjrQgrVMeeuV2345JwFNaKSPNEK79HHc6S5SHd8y9ZQ==}
+  react-bricks@4.5.0:
+    resolution: {integrity: sha512-zXCVsG+7vEmo3WPLGJleiXL68PajC5y83JHy1d8Dke4LQIFXE5VW3z5rcCpjs3t+MpNjysHlIkXFBWp5DocHuQ==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -1363,6 +1363,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   run-parallel@1.2.0:
@@ -2570,7 +2571,7 @@ snapshots:
       react-overlays: 5.2.1(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730)
       uncontrollable: 7.2.1(react@19.0.0-rc-3208e73e-20240730)
 
-  react-bricks@4.4.2(@types/react@18.3.3)(immer@9.0.21)(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730)(tailwindcss@3.4.7):
+  react-bricks@4.5.0(@types/react@18.3.3)(immer@9.0.21)(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730)(tailwindcss@3.4.7):
     dependencies:
       '@headlessui/react': 2.1.2(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730)
       '@headlessui/tailwindcss': 0.2.1(tailwindcss@3.4.7)
