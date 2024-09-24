@@ -5,26 +5,23 @@ import { Menu } from '@/lib/shopify/types';
 import LogoSquare from 'components/logo-square';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { types } from 'react-bricks/rsc';
+import { Repeater, types } from 'react-bricks/rsc';
 
 interface HeaderProps {
     menu: Menu[]
     links: types.RepeaterItems;
 }
 
-const { COMPANY_NAME, SITE_NAME } = process.env;
+const { SITE_NAME } = process.env;
 
-const Header: types.Brick<HeaderProps> = ({ menu, links }) => {
-    const currentYear = new Date().getFullYear();
-    const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
-    const skeleton = 'w-full h-6 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700';
-    const copyrightName = COMPANY_NAME || SITE_NAME || '';
+const Header: types.Brick<HeaderProps> = ({ links }) => {
+
 
     return (
         <nav className="relative flex items-center justify-between p-4 lg:px-6">
             <div className="block flex-none md:hidden">
                 <Suspense fallback={null}>
-                    <MobileMenu menu={menu} />
+                    <MobileMenu links={links} />
                 </Suspense>
             </div>
             <div className="flex w-full items-center">
@@ -39,21 +36,13 @@ const Header: types.Brick<HeaderProps> = ({ menu, links }) => {
                             {SITE_NAME}
                         </div>
                     </Link>
-                    {/* {menu.length ? (
-                        <ul className="hidden gap-6 text-sm md:flex md:items-center">
-                            {menu.map((item: Menu) => (
-                                <li key={item.title}>
-                                    <Link
-                                        href={item.path}
-                                        prefetch={true}
-                                        className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
-                                    >
-                                        {item.title}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : null} */}
+                    <Repeater
+                        propName="links"
+                        items={links}
+                        renderWrapper={(items) => (
+                            <ul className="hidden gap-6 text-sm md:flex md:items-center">{items}</ul>
+                        )}
+                    />
                 </div>
                 <div className="hidden justify-center md:flex md:w-1/3">
                     <Suspense fallback={<SearchSkeleton />}>
