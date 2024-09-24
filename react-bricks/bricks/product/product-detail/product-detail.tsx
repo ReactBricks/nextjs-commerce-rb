@@ -1,5 +1,4 @@
 import { ProductProvider } from '@/components/product/product-context';
-import { getProduct } from '@/lib/shopify';
 import { Gallery } from 'components/product/gallery';
 import { ProductDescription } from 'components/product/product-description';
 import { Image, Product } from 'lib/shopify/types';
@@ -50,10 +49,9 @@ ProductDetail.schema = {
   name: 'product-detail',
   label: 'Product Details',
   getDefaultProps: () => ({}),
-  getExternalData: async (page) => {
-    const product = await getProduct(page.slug);
-    return { product };
-  },
+  mapExternalDataToProps: (externalData) => ({
+    product: externalData.product
+  }),
   repeaterItems: [
     {
       name: 'accordion',
