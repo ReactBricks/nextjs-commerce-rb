@@ -1,6 +1,6 @@
+import ErrorNoHeader from '@/components/react-bricks/error-no-header';
 import config from '@/react-bricks/config';
 import { CartProvider } from 'components/cart/cart-context';
-import { Navbar } from 'components/layout/navbar';
 import ErrorNoFooter from 'components/react-bricks/error-no-footer';
 import ErrorNoKeys from 'components/react-bricks/error-no-keys';
 import ReactBricksApp from 'components/react-bricks/react-bricks-app';
@@ -28,19 +28,24 @@ register(config);
 const getData = async (
   locale: string
 ): Promise<{
+  header: types.Page | null
   footer: types.Page | null;
   errorNoKeys: boolean;
+  errorHeader: boolean;
   errorFooter: boolean;
 }> => {
   let errorNoKeys: boolean = false;
+  let errorHeader: boolean = false
   let errorFooter: boolean = false;
 
   if (!config.apiKey) {
     errorNoKeys = true;
 
     return {
+      header: null,
       footer: null,
       errorNoKeys,
+      errorHeader,
       errorFooter
     };
   }
@@ -59,9 +64,25 @@ const getData = async (
     })
   );
 
+  const header = await Promise.resolve(
+    fetchPage({
+      slug: 'header',
+      language: locale,
+      config,
+      fetchOptions: {
+        next: { revalidate: parseInt(process.env.REACT_BRICKS_REVALIDATE || '3', 10) }
+      }
+    }).catch(() => {
+      errorHeader = true;
+      return null;
+    })
+  );
+
   return {
+    header,
     footer,
     errorNoKeys,
+    errorHeader,
     errorFooter
   };
 };
@@ -78,17 +99,17 @@ export const metadata = {
   },
   ...(twitterCreator &&
     twitterSite && {
-      twitter: {
-        card: 'summary_large_image',
-        creator: twitterCreator,
-        site: twitterSite
-      }
-    })
+    twitter: {
+      card: 'summary_large_image',
+      creator: twitterCreator,
+      site: twitterSite
+    }
+  })
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const cartId = cookies().get('cartId')?.value;
-  const { footer, errorNoKeys, errorFooter } = await getData('en');
+  const { header, footer, errorNoKeys, errorHeader, errorFooter } = await getData('en');
 
   // Don't await the fetch, pass the Promise to the context provider
   const cart = getCart(cartId);
@@ -98,6 +119,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   if (errorNoKeys) return <ErrorNoKeys />;
   const footerOk = footer ? cleanPage(footer, config.pageTypes || [], bricks) : null;
+  const headerOk = header ? cleanPage(header, config.pageTypes || [], bricks) : null;
 
   return (
     <html lang="en" className={GeistSans.variable}>
@@ -105,8 +127,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
           <CartProvider cartPromise={cart}>
             <ReactBricksApp>
-              <Navbar />
               <main>
+                {headerOk && !errorHeader ? (
+                  <PageViewer page={headerOk} main={false} />
+                ) : (
+                  <ErrorNoHeader />
+                )}
                 {children}
                 {footerOk && !errorFooter ? (
                   <PageViewer page={footerOk} main={false} />
