@@ -47,7 +47,9 @@ RelatedProducts.schema = {
   label: 'Medusa Related Products',
   getDefaultProps: () => ({}),
   getExternalData: async (page) => {
-    if (!page?.externalData?.product) return { relatedProducts: null };
+    if (!page?.externalData?.product) {
+      return { relatedProducts: null };
+    }
     const relatedProducts = await getProducts({
       collectionId: page.externalData.product.collection_id
     });

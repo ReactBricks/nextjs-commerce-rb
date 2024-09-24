@@ -198,7 +198,7 @@ const reshapeImages = (images?: MedusaImage[], productTitle?: string): Image[] =
 };
 
 const reshapeProduct = (product: MedusaProduct): Product => {
-  const variant = product.variants?.[0];
+  const variant = product?.variants?.[0];
 
   let amount = '0';
   let currencyCode = 'USD';
@@ -210,28 +210,30 @@ const reshapeProduct = (product: MedusaProduct): Product => {
   const priceRange = {
     maxVariantPrice: {
       amount,
-      currencyCode: product.variants?.[0]?.prices?.[0]?.currency_code.toUpperCase() ?? ''
+      currencyCode: product?.variants?.[0]?.prices?.[0]?.currency_code.toUpperCase() ?? ''
     }
   };
 
-  const updatedAt = new Date(product.updated_at);
-  const createdAt = new Date(product.created_at);
-  const tags = product.tags?.map((tag) => tag.value) || [];
-  const descriptionHtml = product.description ?? '';
-  const featuredImageFilename = product.thumbnail?.match(/.*\/(.*)\..*/)![1];
+  const updatedAt = new Date(product?.updated_at);
+  const createdAt = new Date(product?.created_at);
+  const tags = product?.tags?.map((tag) => tag.value) || [];
+  const descriptionHtml = product?.description ?? '';
+  const featuredImageFilename = product?.thumbnail?.match(/.*\/(.*)\..*/)![1];
   const featuredImage = {
-    url: product.thumbnail ?? '',
-    altText: product.thumbnail ? `${product.title} - ${featuredImageFilename}` : ''
+    url: product?.thumbnail ?? '',
+    altText: product?.thumbnail ? `${product?.title} - ${featuredImageFilename}` : ''
   };
-  const availableForSale = product.variants?.[0]?.purchasable || true;
-  const images = reshapeImages(product.images, product.title);
+  const availableForSale = product?.variants?.[0]?.purchasable || true;
+  const images = reshapeImages(product?.images, product?.title);
 
-  const variants = product.variants.map((variant) =>
-    reshapeProductVariant(variant, product.options)
+  const variants = product?.variants.map((variant) =>
+    reshapeProductVariant(variant, product?.options)
   );
 
   let options = [] as ProductOption[];
-  product.options && (options = product.options.map((option) => reshapeProductOption(option)));
+  if (product?.options) {
+    options = product.options.map((option) => reshapeProductOption(option));
+  }
 
   return {
     ...product,

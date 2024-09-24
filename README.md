@@ -1,4 +1,4 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fcommerce&project-name=commerce&repo-name=commerce&demo-title=Next.js%20Commerce&demo-url=https%3A%2F%2Fdemo.vercel.store&demo-image=https%3A%2F%2Fbigcommerce-demo-asset-ksvtgfvnd.vercel.app%2Fbigcommerce.png&env=COMPANY_NAME,SHOPIFY_REVALIDATION_SECRET,NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN,NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,SITE_NAME,TWITTER_CREATOR,TWITTER_SITE)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fcommerce&project-name=commerce&repo-name=commerce&demo-title=Next.js%20Commerce&demo-url=https%3A%2F%2Fdemo.vercel.store&demo-image=https%3A%2F%2Fbigcommerce-demo-asset-ksvtgfvnd.vercel.app%2Fbigcommerce.png&env=COMPANY_NAME,MEDUSA_REVALIDATION_SECRET,SITE_NAME,TWITTER_CREATOR,TWITTER_SITE)
 
 # Next.js Commerce
 
@@ -22,13 +22,14 @@ In order to use this project with React Bricks visual headless CMS, you'll need 
 - `NEXT_PUBLIC_ENVIRONMENT="main"`
 - `REACT_BRICKS_REVALIDATE="1"` (in production rise this value to 600 to leverage caching)
 
-### Shopify Setup
+### Medusa Setup
 
-To set up the Shopify Store, you may follow the [Vercel and Shopify Integration guide](https://vercel.com/docs/integrations/ecommerce/shopify), with the following exceptions:
+To set up the Medusa Store, you may follow the [Medusa documentation](https://docs.medusajs.com/).  
+Once you have the backend set up, you'll need to:
 
-- **You don't need to create pages like "About us"**, "Privacy" etc. in Shopify, because you can create them in React Bricks
-- **You don't need to create the footer menu** in Shopify, as it is managed in React Bricks
-- **You need to create a page in React Bricks for each product**, ensuring the "slug" matches the product slug on Shopify (this step won't be required any more in the future, as we'll automate it).
+- Create all the collections
+- Create all the products
+- Create a page in React Bricks for each product, ensuring the "slug" matches the product slug on Medusa (this step won't be required any more in the future, as we'll automate it).
 
 <h3 id="v1-note"></h3>
 
@@ -40,10 +41,10 @@ Vercel will only be actively maintaining a Shopify version [as outlined in our v
 
 Vercel is happy to partner and work with any commerce provider to help them get a similar template up and running and listed below. Alternative providers should be able to fork this repository and swap out the `lib/shopify` file with their own implementation while leaving the rest of the template mostly unchanged.
 
-- Shopify (this repository)
+- [Shopify](https://github.com/ReactBricks/nextjs-commerce-rb) ([Demo](https://nextjs-commerce.reactbricks.com/))
 - [BigCommerce](https://github.com/bigcommerce/nextjs-commerce) ([Demo](https://next-commerce-v2.vercel.app/))
 - [Ecwid by Lightspeed](https://github.com/Ecwid/ecwid-nextjs-commerce/) ([Demo](https://ecwid-nextjs-commerce.vercel.app/))
-- [Medusa](https://github.com/medusajs/vercel-commerce) ([Demo](https://medusa-nextjs-commerce.vercel.app/))
+- [Medusa](https://github.com/ReactBricks/nextjs-commerce-rb/tree/medusa) ([Demo](https://nextjs-commerce-medusa.reactbricks.com/))
 - [Saleor](https://github.com/saleor/nextjs-commerce) ([Demo](https://saleor-commerce.vercel.app/))
 - [Shopware](https://github.com/shopwareLabs/vercel-commerce) ([Demo](https://shopware-vercel-commerce-react.vercel.app/))
 - [Swell](https://github.com/swellstores/verswell-commerce) ([Demo](https://verswell-commerce.vercel.app/))
@@ -68,7 +69,7 @@ Integrations enable upgraded or additional functionality for Next.js Commerce
 
 You will need to use the environment variables [defined in `.env.example`](.env.example) to run Next.js Commerce. It's recommended you use [Vercel Environment Variables](https://vercel.com/docs/concepts/projects/environment-variables) for this, but a `.env` file is all that is necessary.
 
-> Note: You should not commit your `.env` file or it will expose secrets that will allow others to control your Shopify store.
+> Note: You should not commit your `.env` file or it will expose secrets that will allow others to control your Medusa store.
 
 1. Install Vercel CLI: `npm i -g vercel`
 2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
@@ -86,11 +87,7 @@ Your app should now be running on [localhost:3000](http://localhost:3000/).
 
 1. Run `vc link`.
 1. Select the `Vercel Solutions` scope.
-1. Connect to the existing `commerce-shopify` project.
+1. Connect to the existing `commerce-medusa` project.
 1. Run `vc env pull` to get environment variables.
 1. Run `pnpm dev` to ensure everything is working correctly.
 </details>
-
-## Vercel, Next.js Commerce, and Shopify Integration Guide
-
-You can use this comprehensive [integration guide](https://vercel.com/docs/integrations/ecommerce/shopify) with step-by-step instructions on how to configure Shopify as a headless CMS using Next.js Commerce as your headless Shopify storefront on Vercel.
