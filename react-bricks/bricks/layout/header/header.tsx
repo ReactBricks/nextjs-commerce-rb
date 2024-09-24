@@ -1,14 +1,12 @@
 import CartModal from '@/components/cart/modal';
 import MobileMenu from '@/components/layout/navbar/mobile-menu';
 import Search, { SearchSkeleton } from '@/components/layout/navbar/search';
-import { Menu } from '@/lib/shopify/types';
 import LogoSquare from 'components/logo-square';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { Repeater, types } from 'react-bricks/rsc';
 
 interface HeaderProps {
-    menu: Menu[]
     links: types.RepeaterItems;
 }
 
@@ -21,7 +19,7 @@ const Header: types.Brick<HeaderProps> = ({ links }) => {
         <nav className="relative flex items-center justify-between p-4 lg:px-6">
             <div className="block flex-none md:hidden">
                 <Suspense fallback={null}>
-                    <MobileMenu links={links} />
+                    <MobileMenu menu={links} />
                 </Suspense>
             </div>
             <div className="flex w-full items-center">
