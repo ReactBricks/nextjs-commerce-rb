@@ -47,7 +47,10 @@ RelatedProducts.schema = {
   label: 'Shopify Related Products',
   getDefaultProps: () => ({}),
   getExternalData: async (page) => {
-    if (!page?.externalData?.product) return { relatedProducts: null };
+    if (!page?.externalData?.product) {
+      return { relatedProducts: null };
+    }
+
     const relatedProducts = await getProductRecommendations(page.externalData.product.id);
 
     return { relatedProducts };
