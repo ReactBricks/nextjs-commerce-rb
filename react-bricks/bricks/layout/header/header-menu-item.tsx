@@ -1,4 +1,4 @@
-import { Link, types } from 'react-bricks/rsc';
+import { Link, Text, types } from 'react-bricks/rsc';
 
 interface HeaderMenuItemProps {
     title: string
@@ -13,7 +13,15 @@ const HeaderMenuItem: types.Brick<HeaderMenuItemProps> = ({ title, path, isMobil
                 href={path}
                 className={isMobile ? "py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white" : "text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"}
             >
-                {title}
+                <Text
+                    propName="title"
+                    value={title}
+                    placeholder="Type a title..."
+                    renderBlock={({ children }) => <span>{children}</span>}
+                    renderPlaceholder={(props) => {
+                        return <span>{props.children}</span>;
+                    }}
+                />
             </Link>
         </li>
     );
@@ -30,12 +38,6 @@ HeaderMenuItem.schema = {
         {
             name: 'path',
             label: 'Link to...',
-            type: types.SideEditPropType.Text,
-
-        },
-        {
-            name: 'title',
-            label: 'Title',
             type: types.SideEditPropType.Text,
 
         }
