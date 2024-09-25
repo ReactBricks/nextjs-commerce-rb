@@ -13,6 +13,10 @@ React Bricks will keep this integration repository up-to-date with the Next.js C
 
 https://github.com/user-attachments/assets/e7e1b15f-4623-443f-9f59-7701c506425f
 
+In this branch you find the Shopify version ([demo](https://nextjs-commerce.reactbricks.com/)).
+
+For Medusa, see the [Medusa branch](https://github.com/ReactBricks/nextjs-commerce-rb/tree/medusa) ([demo](https://nextjs-commerce-medusa.reactbricks.com/))
+
 ### React Bricks Setup
 
 In order to use this project with React Bricks visual headless CMS, you'll need to [create a free React Bricks account](https://www.reactbricks.com/sign-up), create a React Bricks App from the [Dashboard](https://dashboard.reactbricks.com/) and set the React Bricks App credentials in the `.env` file:
